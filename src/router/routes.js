@@ -1,51 +1,49 @@
-import DetallesTrabajos from 'src/pages/DetallesTrabajos.vue'
-
 const routes = [
   {
-    path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    path: "/",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("src/pages/Enterprises.vue") }],
+  },
+  {
+    path: "/error/",
+    component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: '', component: () => import('pages/Empresas.vue') }
-    ]
+      { path: "", component: () => import("pages/ErrorNotFound.vue") },
+    ],
   },
   {
-    path: '/his.trabajo/:id', // Ruta con parámetro dinámico
-    name: 'TrabajoDetalle',
-    component: DetallesTrabajos,
-    props: true // Para pasar el parámetro como prop al componente
+    path: "/login/",
+    component: () => import("pages/Login.vue"),
   },
   {
-    path: '/login',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/Login.vue') }
-    ]
-  },
-  {
-    path: '/registro',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/Registro.vue') }
-    ]
-  },
-  {
-    path: "/empresas/",
+    path: "/enterprise/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       {
         path: "",
-        component: () => import("src/pages/Empresas.vue"),
+        component: () => import("src/pages/Enterprises.vue"),
         name: "enterprises",
       },
       {
         path: ":slug/",
-        component: () => import("src/pages/EmpresaDetalles.vue"),
+        component: () => import("src/pages/EnterpriseDetail.vue"),
         name: "enterprise-detail",
       },
       {
         path: ":enterprise/operator/:pk/",
         component: () => import("src/pages/OperatorDetail.vue"),
         name: "operators-detail",
+      },
+    ],
+  },
+  {
+    path: "/users/",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/Users.vue"),
+        name: "users",
       },
     ],
   },
@@ -72,23 +70,14 @@ const routes = [
     ],
   },
   {
-    path: "/usuarios/",
-    component: () => import("layouts/MainLayout.vue"),
-    children: [
-      {
-        path: "",
-        component: () => import("src/pages/Users.vue"),
-        name: "users",
-      },
-    ],
-  },
-  {
     path: "/cuenta/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       
     ],
   },
+ 
+  
   {
     path: "/Configuracion",
     component: () => import("layouts/MainLayout.vue"),
@@ -100,10 +89,6 @@ const routes = [
       },
     ],
   },
-  {
-    path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue')
-  }
-]
+];
 
-export default routes
+export default routes;
